@@ -66,6 +66,22 @@ public class WithdrawalTest {
 	account.deposit(new BigDecimal(500).setScale(2, 1));
 	// When/Then
 	account.withdraw(null);
-
     }
+
+    @Test
+    public void depositing_less_than_one_hundredth_of_a_unit_does_not_change_balance()
+	    throws NotEnoughMoneyInTheAccountException {
+	// Given
+	Account acc = new Account("Baris", "01");
+	BigDecimal depositValue = new BigDecimal(100).setScale(2, 1);
+	acc.deposit(depositValue);
+
+	// When
+	acc.withdraw(new BigDecimal(0.001));
+
+	// Then
+	BigDecimal afterDeposit = acc.getBalance();
+	assertEquals(depositValue, afterDeposit);
+    }
+
 }

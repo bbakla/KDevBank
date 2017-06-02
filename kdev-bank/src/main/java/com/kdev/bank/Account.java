@@ -65,8 +65,12 @@ public class Account {
 		    "Please provide a positive amount.");
 	if (balance.subtract(amount).compareTo(BigDecimal.ZERO) < 0)
 	    throw new NotEnoughMoneyInTheAccountException();
-	balance = balance.subtract(amount);
 
+	amount = amount.setScale(2, 1);
+	if (amount.compareTo(BigDecimal.ZERO) >= 0) {
+	    balance = balance.subtract(amount).setScale(2, 1);
+
+	}
     }
 
     private boolean isValid(BigDecimal amount) {
