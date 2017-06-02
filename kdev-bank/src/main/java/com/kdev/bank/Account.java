@@ -45,17 +45,23 @@ public class Account {
 	    throw new IllegalArgumentException("Amount was null");
 	}
 
-	if (amount.compareTo(BigDecimal.ZERO) >= 0) {
-	    amount.setScale(2, 1);
-	    balance = balance.add(amount).setScale(2, 1);
-	} else {
-	    throw new IllegalArgumentException(
-		    "Amount to be added is lower than zero");
+	synchronized (balance) {
+	    if (amount.compareTo(BigDecimal.ZERO) >= 0) {
+		amount.setScale(2, 1);
+		balance = balance.add(amount).setScale(2, 1);
+	    } else {
+		throw new IllegalArgumentException(
+			"Amount to be added is lower than zero");
+	    }
 	}
+
     }
 
     public BigDecimal getBalance() {
-	return balance;
+	synchronized (balance) {
+	    return balance;
+	}
+
     }
 
     public void withdraw(BigDecimal amount)
@@ -66,11 +72,14 @@ public class Account {
 	if (balance.subtract(amount).compareTo(BigDecimal.ZERO) < 0)
 	    throw new NotEnoughMoneyInTheAccountException();
 
-	amount = amount.setScale(2, 1);
-	if (amount.compareTo(BigDecimal.ZERO) >= 0) {
-	    balance = balance.subtract(amount).setScale(2, 1);
+	synchronized (balance) {
+	    amount = amount.setScale(2, 1);
+	    if (amount.compareTo(BigDecimal.ZERO) >= 0) {
+		balance = balance.subtract(amount).setScale(2, 1);
 
+	    }
 	}
+
     }
 
     private boolean isValid(BigDecimal amount) {
