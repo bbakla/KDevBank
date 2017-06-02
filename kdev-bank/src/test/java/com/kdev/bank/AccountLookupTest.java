@@ -31,7 +31,7 @@ public class AccountLookupTest {
 	assertEquals(accountNumber, account.getAccountNumber());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void lookup_account_with_null_account_number_throws_runtime_exception()
 	    throws AccountNotFoundException {
 	Bank bank = new Bank();

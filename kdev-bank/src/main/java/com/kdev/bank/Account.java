@@ -3,6 +3,7 @@ package com.kdev.bank;
 import java.math.BigDecimal;
 
 import com.kdev.bank.exception.AccountNotEmptyException;
+import com.kdev.bank.exception.NotEnoughMoneyInTheAccountException;
 
 public class Account {
 
@@ -13,7 +14,8 @@ public class Account {
 
     public Account(String name, String accountNumber) {
 	if (name == null || accountNumber == null) {
-	    throw new IllegalArgumentException("Customer name or account number are not allowed to be null");
+	    throw new IllegalArgumentException(
+		    "Customer name or account number are not allowed to be null");
 	}
 	this.name = name;
 	this.accountNumber = accountNumber;
@@ -47,7 +49,8 @@ public class Account {
 	    amount.setScale(2, 1);
 	    balance = balance.add(amount).setScale(2, 1);
 	} else {
-	    throw new IllegalArgumentException("Amount to be added is lower than zero");
+	    throw new IllegalArgumentException(
+		    "Amount to be added is lower than zero");
 	}
     }
 
@@ -55,15 +58,19 @@ public class Account {
 	return balance;
     }
 
-    public void withdraw(BigDecimal amount) {
+    public void withdraw(BigDecimal amount)
+	    throws NotEnoughMoneyInTheAccountException {
 	if (!isValid(amount))
-	    throw new IllegalArgumentException("Please provide a positive amount.");
+	    throw new IllegalArgumentException(
+		    "Please provide a positive amount.");
+	if (balance.subtract(amount).compareTo(BigDecimal.ZERO) < 0)
+	    throw new NotEnoughMoneyInTheAccountException();
 	balance = balance.subtract(amount);
 
     }
 
     private boolean isValid(BigDecimal amount) {
-	if (amount.compareTo(BigDecimal.ZERO) < 0) {
+	if (amount == null || amount.compareTo(BigDecimal.ZERO) < 0) {
 	    return false;
 	}
 	return true;
