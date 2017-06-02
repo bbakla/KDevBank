@@ -32,7 +32,8 @@ public class Account {
 
     public boolean deposit(BigDecimal amount) {
 	if (amount.compareTo(BigDecimal.ZERO) >= 0) {
-	    balance = balance.add(amount);
+	    amount.setScale(2, 1);
+	    balance = balance.add(amount).setScale(2, 1);
 	    return true;
 	} else {
 	    return false;
@@ -40,6 +41,6 @@ public class Account {
     }
 
     public BigDecimal getBalance() {
-	return new BigDecimal(balance.longValueExact());
+	return balance;
     }
 }

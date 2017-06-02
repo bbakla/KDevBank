@@ -44,4 +44,13 @@ public class AccountTest {
 	BigDecimal afterDeposit = acc.getBalance();
 	assertEquals(0, afterDeposit.longValueExact());
     }
+
+    @Test
+    public void depositing_less_than_one_hundredth_of_a_unit_does_not_change_balance() {
+	Account acc = new Account("John Doe", "01");
+	BigDecimal depositValue = new BigDecimal(0.001);
+	acc.deposit(depositValue);
+	BigDecimal afterDeposit = acc.getBalance();
+	assertTrue(afterDeposit.compareTo(BigDecimal.ZERO) == 0);
+    }
 }
