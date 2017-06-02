@@ -38,4 +38,9 @@ public class Account {
     public BigDecimal getBalance() {
 	return new BigDecimal(balance.longValueExact());
     }
+
+    public void withdraw(BigDecimal amount) {
+	balance = balance.subtract(amount);
+
+    }
 }
