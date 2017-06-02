@@ -6,7 +6,7 @@ public class Account {
 
     private String accountNumber;
     private String name;
-    private BigDecimal balance = new BigDecimal(0);
+    private BigDecimal balance = new BigDecimal(0).setScale(2, 1);
     private boolean closed;
 
     public Account(String name, String accountNumber) {
@@ -31,8 +31,12 @@ public class Account {
     }
 
     public boolean deposit(BigDecimal amount) {
-	balance = balance.add(amount);
-	return true;
+	if (amount.compareTo(BigDecimal.ZERO) >= 0) {
+	    balance = balance.add(amount);
+	    return true;
+	} else {
+	    return false;
+	}
     }
 
     public BigDecimal getBalance() {
