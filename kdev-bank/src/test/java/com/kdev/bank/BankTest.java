@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 import com.kdev.bank.exception.AccountNotFoundException;
 
@@ -33,10 +32,10 @@ public class BankTest {
   }
 
   @Test
-  public void can_bank_create_account() {
+  public void can_bank_create_account() throws AccountNotFoundException {
     Bank bank = new Bank();
-    BankAccount account = bank.createAccount("John Doe");
+    String accountNumber = bank.openAccount("John Doe");
+    Account account = bank.lookupAccountByNumber(accountNumber);
     assertNotNull(account);
   }
-  
 }

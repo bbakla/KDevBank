@@ -6,12 +6,12 @@ import java.util.Map;
 import com.kdev.bank.exception.AccountNotFoundException;
 
 public class Bank {
-    
-    public BankAccount createAccount(String customerName) {
-	return new BankAccount(customerName, "");
-    }
 
   private Map<String, Account> accountsByAccNumber = new HashMap<String, Account>();
+
+  public String openAccount(String customerName) {
+    return null;
+  }
 
   public Account lookupAccountByNumber(String accountNumber)
       throws AccountNotFoundException {
@@ -22,8 +22,4 @@ public class Bank {
       return account;
   }
 
-  public String openAccount(String name) {
-    return null;
-
-  }
 }
