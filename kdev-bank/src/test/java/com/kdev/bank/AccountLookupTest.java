@@ -10,7 +10,7 @@ import com.kdev.bank.exception.AccountNotFoundException;
 public class AccountLookupTest {
 
     @Test(expected = AccountNotFoundException.class)
-    public void lookup_account_that_does_not_exist_throws_BankAccountNotFoundException()
+    public void lookup_account_that_does_not_exist_throws_AccountNotFoundException()
 	    throws AccountNotFoundException {
 	Bank bank = new Bank();
 	bank.lookupAccountByNumber("123456");

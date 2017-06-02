@@ -1,6 +1,8 @@
 package com.kdev.bank;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.kdev.bank.exception.AccountNotFoundException;
@@ -26,10 +28,16 @@ public class Bank {
 	    return account;
     }
 
-    public void closeAccount(String accountNumber) {
+ public void closeAccount(String accountNumber) {
 	Account acc = accountsByAccNumber.get(accountNumber);
 	acc.close();
 	accountsByAccNumber.remove(accountNumber);
     }
 
-}
+public List<String> listAccountNumbers() {
+	List<String> accountNumbers = new ArrayList<String>();
+	for (Account account : accountsByAccNumber.values()) {
+	    accountNumbers.add(account.getAccountNumber());
+	}
+	return accountNumbers;
+    }}
