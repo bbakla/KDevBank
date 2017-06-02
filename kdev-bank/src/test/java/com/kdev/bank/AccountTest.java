@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.math.BigDecimal;
+
 import org.junit.Test;
 
 public class AccountTest {
@@ -20,5 +22,17 @@ public class AccountTest {
 	assertFalse(acc.isClosed());
 	acc.close();
 	assertTrue(acc.isClosed());
+    }
+
+    @Test
+    public void depositing_money_will_increase_balance_proportionally() {
+	Account acc = new Account("John Doe", "01");
+	BigDecimal deposit = new BigDecimal(100);
+
+	BigDecimal initial = acc.getBalance();
+	boolean depositOk = acc.deposit(deposit);
+	BigDecimal afterAdd = acc.getBalance();
+	assertEquals(initial.add(deposit), afterAdd);
+	assertTrue(depositOk);
     }
 }
