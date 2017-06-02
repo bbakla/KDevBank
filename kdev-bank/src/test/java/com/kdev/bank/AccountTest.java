@@ -41,17 +41,25 @@ public class AccountTest {
 	Account acc = new Account(JOHN_DOE, "01");
 	BigDecimal deposit = new BigDecimal(100);
 
+	// When
 	BigDecimal initial = acc.getBalance();
 	acc.deposit(deposit);
+
+	// Then
 	BigDecimal afterAdd = acc.getBalance();
 	assertEquals(initial.add(deposit), afterAdd);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void depositing_negative_amount_money_will_not_work() {
+	// Given
 	Account acc = new Account(JOHN_DOE, "01");
 	BigDecimal depositValue = new BigDecimal(-100);
+
+	// When
 	acc.deposit(depositValue);
+
+	// Then
 	BigDecimal afterDeposit = acc.getBalance();
 	assertEquals(0, afterDeposit.longValueExact());
     }
@@ -64,18 +72,28 @@ public class AccountTest {
 
     @Test
     public void depositing_less_than_one_hundredth_of_a_unit_does_not_change_balance() {
+	// Given
 	Account acc = new Account(JOHN_DOE, "01");
 	BigDecimal depositValue = new BigDecimal(0.001);
+
+	// When
 	acc.deposit(depositValue);
+
+	// Then
 	BigDecimal afterDeposit = acc.getBalance();
 	assertTrue(afterDeposit.compareTo(BigDecimal.ZERO) == 0);
     }
 
     @Test(expected = AccountNotEmptyException.class)
     public void closing_an_account_which_is_not_empty_fails() {
+	// Given
 	Account acc = new Account(JOHN_DOE, "01");
 	BigDecimal depositValue = new BigDecimal(1);
+
+	// When
 	acc.deposit(depositValue);
+
+	// Then
 	acc.close();
     }
 
