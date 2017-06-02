@@ -69,7 +69,7 @@ public class WithdrawalTest {
     }
 
     @Test
-    public void depositing_less_than_one_hundredth_of_a_unit_does_not_change_balance()
+    public void withdrawing_less_than_one_hundredth_of_a_unit_does_not_change_balance()
 	    throws NotEnoughMoneyInTheAccountException {
 	// Given
 	Account acc = new Account("Baris", "01");
