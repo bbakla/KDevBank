@@ -27,4 +27,18 @@ public class ListAccountsTest {
 	assertEquals(1, accounts.size());
 	assertEquals(accountNumber, accounts.get(0));
     }
+
+    @Test
+    public void closed_account_is_not_found_in_the_list_of_bank_accounts() {
+	// Given
+	Bank bank = new Bank();
+	String name = "Mihaela";
+	String accountNumber = bank.openAccount(name);
+	bank.closeAccount(accountNumber);
+	// When:
+	List<String> accounts = bank.listAccountNumbers();
+	// Then:
+	assertEquals(0, accounts.size());
+
+    }
 }

@@ -37,4 +37,17 @@ public class AccountLookupTest {
 	Bank bank = new Bank();
 	bank.lookupAccountByNumber(null);
     }
+
+    @Test(expected = AccountNotFoundException.class)
+    public void lookup_closed_account_throws_exception_AccountNotFoundException()
+	    throws AccountNotFoundException {
+	// Given:
+	Bank bank = new Bank();
+	String name = "Mihaela";
+	// When:
+	String accountNumber = bank.openAccount(name);
+	bank.closeAccount(accountNumber);
+	// Then:
+	bank.lookupAccountByNumber(accountNumber);
+    }
 }
