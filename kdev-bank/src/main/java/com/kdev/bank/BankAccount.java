@@ -8,8 +8,16 @@ public class BankAccount {
   private String name;
   private BigDecimal balance;
   private boolean closed;
-
+  
   public BankAccount(String name, String accountNumber) {
+      this.name = name;
+  }
 
+  public String getCustomerName() {
+    return name;
+  }
+
+  public String getAccountNumber() {
+    return accountNumber;
   }
 }
