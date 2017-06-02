@@ -2,6 +2,8 @@ package com.kdev.bank;
 
 import java.math.BigDecimal;
 
+import com.kdev.bank.exception.AccountNotEmptyException;
+
 public class Account {
 
     private String accountNumber;
@@ -27,6 +29,9 @@ public class Account {
     }
 
     public void close() {
+	if (balance.compareTo(BigDecimal.ZERO) > 0) {
+	    throw new AccountNotEmptyException();
+	}
 	closed = true;
     }
 
