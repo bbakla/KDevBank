@@ -2,22 +2,24 @@ package com.kdev.bank;
 
 import java.math.BigDecimal;
 
-public class BankAccount {
+public class Account {
 
   private String accountNumber;
   private String name;
   private BigDecimal balance;
   private boolean closed;
-  
-  public BankAccount(String name, String accountNumber) {
-      this.name = name;
+
+  public Account(String name, String accountNumber) {
+
   }
 
-  public String getCustomerName() {
-    return name;
+  public String getName() {
+    // TODO Auto-generated method stub
+    return null;
   }
 
   public String getAccountNumber() {
-    return accountNumber;
+    // TODO Auto-generated method stub
+    return null;
   }
 }
