@@ -56,6 +56,12 @@ public class AccountTest {
 	assertEquals(0, afterDeposit.longValueExact());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void depositing_null_amount_money_will_not_work() {
+	Account acc = new Account(JOHN_DOE, "01");
+	acc.deposit(null);
+    }
+
     @Test
     public void depositing_less_than_one_hundredth_of_a_unit_does_not_change_balance() {
 	Account acc = new Account(JOHN_DOE, "01");
