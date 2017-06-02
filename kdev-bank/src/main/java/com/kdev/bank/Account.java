@@ -6,7 +6,7 @@ public class Account {
 
     private String accountNumber;
     private String name;
-    private BigDecimal balance;
+    private BigDecimal balance = new BigDecimal(0);
     private boolean closed;
 
     public Account(String name, String accountNumber) {
@@ -28,5 +28,14 @@ public class Account {
 
     public void close() {
 	closed = true;
+    }
+
+    public boolean deposit(BigDecimal amount) {
+	balance = balance.add(amount);
+	return true;
+    }
+
+    public BigDecimal getBalance() {
+	return new BigDecimal(balance.longValueExact());
     }
 }
