@@ -35,4 +35,13 @@ public class AccountTest {
 	assertEquals(initial.add(deposit), afterAdd);
 	assertTrue(depositOk);
     }
+
+    @Test
+    public void depositing_negative_amount_money_will_not_work() {
+	Account acc = new Account("John Doe", "01");
+	BigDecimal depositValue = new BigDecimal(-100);
+	acc.deposit(depositValue);
+	BigDecimal afterDeposit = acc.getBalance();
+	assertEquals(0, afterDeposit.longValueExact());
+    }
 }
