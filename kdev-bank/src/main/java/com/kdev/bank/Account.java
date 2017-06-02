@@ -21,4 +21,12 @@ public class Account {
     public String getAccountNumber() {
 	return accountNumber;
     }
+
+    public boolean isClosed() {
+	return closed;
+    }
+
+    public void close() {
+	closed = true;
+    }
 }

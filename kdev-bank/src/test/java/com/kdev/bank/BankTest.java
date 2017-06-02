@@ -3,6 +3,7 @@ package com.kdev.bank;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.kdev.bank.exception.AccountNotFoundException;
@@ -22,11 +23,21 @@ public class BankTest {
 	Bank bank = new Bank();
 	String account = bank.openAccount("John Doe");
 	String account2 = bank.openAccount("Jane Doe");
-
 	Account acc1 = bank.lookupAccountByNumber(account);
 	Account acc2 = bank.lookupAccountByNumber(account2);
-
 	assertNotEquals(acc1.getAccountNumber(), acc2.getAccountNumber());
+    }
+
+    @Test
+    public void bank_can_close_account() throws AccountNotFoundException {
+	Bank bank = new Bank();
+	String accountNumber = bank.openAccount("John Doe");
+	bank.closeAccount(accountNumber);
+	try {
+	    bank.lookupAccountByNumber(accountNumber);
+	} catch (AccountNotFoundException e) {
+	    Assert.assertTrue("Lookup should not work for closed account", true);
+	}
     }
 
 }
