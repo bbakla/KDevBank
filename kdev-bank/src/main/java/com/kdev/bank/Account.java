@@ -50,7 +50,17 @@ public class Account {
     }
 
     public void withdraw(BigDecimal amount) {
+	if (!isValid(amount))
+	    throw new IllegalArgumentException(
+		    "Please provide a positive amount.");
 	balance = balance.subtract(amount);
 
+    }
+
+    private boolean isValid(BigDecimal amount) {
+	if (amount.compareTo(BigDecimal.ZERO) < 0) {
+	    return false;
+	}
+	return true;
     }
 }
