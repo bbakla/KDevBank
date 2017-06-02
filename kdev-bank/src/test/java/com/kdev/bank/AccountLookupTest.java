@@ -17,8 +17,7 @@ public class AccountLookupTest {
     }
 
     @Test
-    public void lookup_account_that_exists_returns_the_account()
-	    throws AccountNotFoundException {
+    public void lookup_account_that_exists_returns_the_account() throws AccountNotFoundException {
 	// Given:
 	Bank bank = new Bank();
 	String name = "Mihaela";
@@ -31,9 +30,8 @@ public class AccountLookupTest {
 	assertEquals(accountNumber, account.getAccountNumber());
     }
 
-    @Test(expected = NullPointerException.class)
-    public void lookup_account_with_null_account_number_throws_runtime_exception()
-	    throws AccountNotFoundException {
+    @Test(expected = AccountNotFoundException.class)
+    public void lookup_account_with_null_account_number_throws_runtime_exception() throws AccountNotFoundException {
 	Bank bank = new Bank();
 	bank.lookupAccountByNumber(null);
     }
