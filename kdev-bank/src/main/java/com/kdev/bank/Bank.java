@@ -6,6 +6,10 @@ import java.util.Map;
 import com.kdev.bank.exception.AccountNotFoundException;
 
 public class Bank {
+    
+    public BankAccount createAccount(String customerName) {
+	return new BankAccount(customerName, "");
+    }
 
   private Map<String, Account> accountsByAccNumber = new HashMap<String, Account>();
 
