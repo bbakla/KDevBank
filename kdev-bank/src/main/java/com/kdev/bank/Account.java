@@ -12,6 +12,9 @@ public class Account {
     private boolean closed;
 
     public Account(String name, String accountNumber) {
+	if (name == null || accountNumber == null) {
+	    throw new IllegalArgumentException("Customer name or account number are not allowed to be null");
+	}
 	this.name = name;
 	this.accountNumber = accountNumber;
     }
@@ -35,13 +38,16 @@ public class Account {
 	closed = true;
     }
 
-    public boolean deposit(BigDecimal amount) {
+    public void deposit(BigDecimal amount) {
+	if (amount == null) {
+	    throw new IllegalArgumentException("Amount was null");
+	}
+
 	if (amount.compareTo(BigDecimal.ZERO) >= 0) {
 	    amount.setScale(2, 1);
 	    balance = balance.add(amount).setScale(2, 1);
-	    return true;
 	} else {
-	    return false;
+	    throw new IllegalArgumentException("Amount to be added is lower than zero");
 	}
     }
 
@@ -51,8 +57,7 @@ public class Account {
 
     public void withdraw(BigDecimal amount) {
 	if (!isValid(amount))
-	    throw new IllegalArgumentException(
-		    "Please provide a positive amount.");
+	    throw new IllegalArgumentException("Please provide a positive amount.");
 	balance = balance.subtract(amount);
 
     }
