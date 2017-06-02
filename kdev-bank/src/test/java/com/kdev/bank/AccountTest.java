@@ -1,6 +1,8 @@
 package com.kdev.bank;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -12,4 +14,11 @@ public class AccountTest {
 	assertEquals("John Doe", acc.getName());
     }
 
+    @Test
+    public void account_can_be_closed() {
+	Account acc = new Account("John Doe", "01");
+	assertFalse(acc.isClosed());
+	acc.close();
+	assertTrue(acc.isClosed());
+    }
 }

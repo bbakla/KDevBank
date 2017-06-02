@@ -11,14 +11,12 @@ public class Bank {
     private Map<String, Account> accountsByAccNumber = new HashMap<String, Account>();
 
     public String openAccount(String customerName) {
-	Account acc = new Account(customerName,
-		accNoGenerator.generateAccountNumber());
+	Account acc = new Account(customerName, accNoGenerator.generateAccountNumber());
 	accountsByAccNumber.put(acc.getAccountNumber(), acc);
 	return acc.getAccountNumber();
     }
 
-    public Account lookupAccountByNumber(String accountNumber)
-	    throws AccountNotFoundException {
+    public Account lookupAccountByNumber(String accountNumber) throws AccountNotFoundException {
 	if (accountNumber == null)
 	    throw new NullPointerException();
 	Account account = accountsByAccNumber.get(accountNumber);
@@ -26,6 +24,12 @@ public class Bank {
 	    throw new AccountNotFoundException();
 	else
 	    return account;
+    }
+
+    public void closeAccount(String accountNumber) {
+	Account acc = accountsByAccNumber.get(accountNumber);
+	acc.close();
+	accountsByAccNumber.remove(accountNumber);
     }
 
 }
