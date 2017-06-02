@@ -38,19 +38,15 @@ public class BankTest {
     }
 
     @Test
-    public void is_account_owner_name_set_correctly() {
-	Bank bank = new Bank();
-	String account = bank.openAccount("John Doe");
-	// assertEquals("John Doe", account.getName());
-    }
-
-    @Test
-    public void bank_account_id_is_unique() {
+    public void bank_account_id_is_unique() throws AccountNotFoundException {
 	Bank bank = new Bank();
 	String account = bank.openAccount("John Doe");
 	String account2 = bank.openAccount("Jane Doe");
-	// assertNotEquals(account.getAccountNumber(),
-	// account2.getAccountNumber());
+
+	Account acc1 = bank.lookupAccountByNumber(account);
+	Account acc2 = bank.lookupAccountByNumber(account2);
+
+	assertNotEquals(acc1.getAccountNumber(), acc2.getAccountNumber());
     }
 
 }
