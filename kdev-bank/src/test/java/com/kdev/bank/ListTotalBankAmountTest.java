@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import org.junit.Test;
 
 import com.kdev.bank.exception.AccountNotFoundException;
+import com.kdev.bank.exception.NotEnoughMoneyInTheAccountException;
 
 public class ListTotalBankAmountTest {
 
@@ -72,7 +73,8 @@ public class ListTotalBankAmountTest {
 
     @Test
     public void bank_with_accounts_has_total_amount_affected_by_withdraw()
-	    throws AccountNotFoundException {
+	    throws AccountNotFoundException,
+	    NotEnoughMoneyInTheAccountException {
 	// Given
 	Bank bank = new Bank();
 	String customerName = "Mihaela";

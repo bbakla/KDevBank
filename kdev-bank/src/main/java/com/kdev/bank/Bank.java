@@ -24,7 +24,7 @@ public class Bank {
     public Account lookupAccountByNumber(String accountNumber)
 	    throws AccountNotFoundException {
 	if (accountNumber == null)
-	    throw new NullPointerException();
+	    throw new IllegalArgumentException();
 	Account account = accountsByAccNumber.get(accountNumber);
 	if (account == null)
 	    throw new AccountNotFoundException();

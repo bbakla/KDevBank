@@ -2,6 +2,8 @@ package com.kdev.bank;
 
 import java.math.BigDecimal;
 
+import com.kdev.bank.exception.NotEnoughMoneyInTheAccountException;
+
 public class Account {
 
     private String accountNumber;
@@ -44,16 +46,19 @@ public class Account {
 	return balance;
     }
 
-    public void withdraw(BigDecimal amount) {
+    public void withdraw(BigDecimal amount)
+	    throws NotEnoughMoneyInTheAccountException {
 	if (!isValid(amount))
 	    throw new IllegalArgumentException(
 		    "Please provide a positive amount.");
+	if (balance.subtract(amount).compareTo(BigDecimal.ZERO) < 0)
+	    throw new NotEnoughMoneyInTheAccountException();
 	balance = balance.subtract(amount);
 
     }
 
     private boolean isValid(BigDecimal amount) {
-	if (amount.compareTo(BigDecimal.ZERO) < 0) {
+	if (amount == null || amount.compareTo(BigDecimal.ZERO) < 0) {
 	    return false;
 	}
 	return true;
