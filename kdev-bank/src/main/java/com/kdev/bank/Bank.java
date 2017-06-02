@@ -47,7 +47,7 @@ public class Bank {
     }
 
     public BigDecimal getTotalAmount() {
-	BigDecimal total = new BigDecimal(0);
+	BigDecimal total = new BigDecimal(0).setScale(2, 1);
 	for (Entry<String, Account> entry : accountsByAccNumber.entrySet()) {
 	    total = total.add(entry.getValue().getBalance());
 	}

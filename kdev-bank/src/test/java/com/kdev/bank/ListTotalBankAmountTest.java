@@ -15,7 +15,7 @@ public class ListTotalBankAmountTest {
 	// Given/When
 	Bank bank = new Bank();
 	// Then
-	assertEquals(new BigDecimal(0), bank.getTotalAmount());
+	assertEquals(BigDecimal.ZERO.setScale(2, 1), bank.getTotalAmount());
     }
 
     @Test
@@ -30,7 +30,7 @@ public class ListTotalBankAmountTest {
 	// When
 	BigDecimal totalAmount = bank.getTotalAmount();
 	// Then
-	assertEquals(BigDecimal.ZERO, totalAmount);
+	assertEquals(BigDecimal.ZERO.setScale(2, 1), totalAmount);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class ListTotalBankAmountTest {
 	String customerName = "Mihaela";
 	String accountNumber = bank.openAccount(customerName);
 	Account customerAccount = bank.lookupAccountByNumber(accountNumber);
-	BigDecimal amount = new BigDecimal(1000);
+	BigDecimal amount = new BigDecimal(1000).setScale(2, 1);
 	customerAccount.deposit(amount);
 	// When
 	BigDecimal totalAmount = bank.getTotalAmount();
@@ -58,7 +58,7 @@ public class ListTotalBankAmountTest {
 	String firstAccountNumber = bank.openAccount(firstCustomerName);
 	Account firstCustomerAccount = bank
 		.lookupAccountByNumber(firstAccountNumber);
-	BigDecimal amount = new BigDecimal(1000);
+	BigDecimal amount = new BigDecimal(1000).setScale(2, 1);
 	firstCustomerAccount.deposit(amount);
 
 	String secondCustomerName = "Baris";
@@ -78,7 +78,7 @@ public class ListTotalBankAmountTest {
 	String customerName = "Mihaela";
 	String accountNumber = bank.openAccount(customerName);
 	Account customerAccount = bank.lookupAccountByNumber(accountNumber);
-	BigDecimal amount = new BigDecimal(1000);
+	BigDecimal amount = new BigDecimal(1000.00).setScale(2, 1);
 	customerAccount.deposit(amount);
 	// When
 	BigDecimal totalAmount = bank.getTotalAmount();
@@ -89,6 +89,6 @@ public class ListTotalBankAmountTest {
 	customerAccount.withdraw(amount);
 	totalAmount = bank.getTotalAmount();
 	// Then
-	assertEquals(BigDecimal.ZERO, totalAmount);
+	assertEquals(BigDecimal.ZERO.setScale(2, 1), totalAmount);
     }
 }
